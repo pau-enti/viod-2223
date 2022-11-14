@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.firstapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,11 +13,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.FirstApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".quotes.QuotesActivity"
+            android:name=".fragments.BottomBarActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,15 +25,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".particleslist.ParticlesActivity"
+            android:name=".quotes.QuotesActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".particleslist.ParticlesActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
