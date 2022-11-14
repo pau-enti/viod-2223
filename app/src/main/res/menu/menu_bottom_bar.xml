@@ -8,4 +8,8 @@
         android:title="Image"
         android:icon="@drawable/ic_baseline_blur_circular_24"></item>
 
+    <item android:id="@+id/thirdButton"
+        android:title="Quotes"
+        android:icon="@drawable/ic_baseline_catching_pokemon_24"></item>
+
 </menu>

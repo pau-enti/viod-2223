@@ -18,11 +18,13 @@ class BottomBarActivity : AppCompatActivity() {
 
         val firstFragment = FirstFragment()
         val imageFragment = ImageFragment()
+        val quotesFragment = QuotesFragment()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.firstButton -> setFragment(firstFragment)
                 R.id.secondButton -> setFragment(imageFragment)
+                R.id.thirdButton -> setFragment(quotesFragment)
             }
             true
         }
@@ -32,7 +34,15 @@ class BottomBarActivity : AppCompatActivity() {
 
     fun setFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().apply {
-            replace(binding.fragmentContainer.id, fragment)
+            supportFragmentManager.fragments.forEach {
+                hide(it)
+            }
+
+            if (!fragment.isAdded)
+                add(binding.fragmentContainer.id, fragment)
+            else
+                show(fragment)
+
             commit()
         }
     }
