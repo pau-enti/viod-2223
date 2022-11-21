@@ -5,33 +5,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.firstapp.databinding.ActivityLoginBinding
-import com.example.firstapp.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
-    
-    val CORRECT_USERNAME = "pau@enti.cat"
-    val CORRECT_PASSWORD = "123456"
 
     lateinit var binding: ActivityLoginBinding
+    lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        
-        binding.loginButton.setOnClickListener { 
+
+        binding.loginButton.setOnClickListener {
             val username = binding.userInput.text.toString()
             val password = binding.passwordInput.text.toString()
 
-            Toast.makeText(this, "user: $username, pass: $password", Toast.LENGTH_SHORT).show()
-            
-            if (username == CORRECT_USERNAME && password == CORRECT_PASSWORD) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            } else {
-                Toast.makeText(this, "Incorrect user or password", Toast.LENGTH_SHORT).show()
-            }
+            firebaseAuth = FirebaseAuth.getInstance()
+            firebaseAuth.signInWithEmailAndPassword(username, password)
+                .addOnSuccessListener {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }.addOnFailureListener {
+                    Toast.makeText(this, "Incorrect user or password", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }

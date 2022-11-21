@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "922650033321",
+    "project_id": "viod-2223",
+    "storage_bucket": "viod-2223.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922650033321:android:fd6db473e688bcd215fdb8",
+        "android_client_info": {
+          "package_name": "com.example.firstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922650033321-j7rqnm080mqc56ce2tqtab6a9v93a8if.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXnpgTOATWXSo2N0sC3BQTHiBcCz8m9_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922650033321-j7rqnm080mqc56ce2tqtab6a9v93a8if.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
