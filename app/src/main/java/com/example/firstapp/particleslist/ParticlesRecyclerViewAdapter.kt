@@ -17,7 +17,7 @@ class ParticlesRecyclerViewAdapter(val particles: List<String>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParticleVH {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemParticleBinding.inflate(layoutInflater)
+        val binding = ItemParticleBinding.inflate(layoutInflater, parent, false)
         return ParticleVH(binding)
     }
 
