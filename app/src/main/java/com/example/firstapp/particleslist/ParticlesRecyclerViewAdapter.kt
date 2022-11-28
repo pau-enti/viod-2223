@@ -1,5 +1,6 @@
 package com.example.firstapp.particleslist
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,11 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.firstapp.R
 import com.example.firstapp.databinding.ItemParticleBinding
 
-class ParticlesRecyclerViewAdapter(
-    val particles: List<Particle>,
-    val context: Context
-) :
+class ParticlesRecyclerViewAdapter(val context: Context) :
     RecyclerView.Adapter<ParticlesRecyclerViewAdapter.ParticleVH>() {
+
+    private var particles: List<Particle> = arrayListOf()
 
     inner class ParticleVH(binding: ItemParticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -69,5 +69,11 @@ class ParticlesRecyclerViewAdapter(
 
     override fun getItemCount(): Int {
         return particles.size
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateParticlesList(particles: List<Particle>) {
+        this.particles = particles
+        notifyDataSetChanged()
     }
 }

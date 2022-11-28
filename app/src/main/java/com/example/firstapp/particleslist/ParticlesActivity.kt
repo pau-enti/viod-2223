@@ -2,14 +2,17 @@ package com.example.firstapp.particleslist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.firstapp.databinding.ActivityParticlesBinding
 import com.example.firstapp.particleslist.Particle.Family.*
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ParticlesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityParticlesBinding
+    private lateinit var firestore: FirebaseFirestore
 
-    private val particles = arrayListOf<Particle>().apply {
+    private var particles = arrayListOf<Particle>()/*.apply {
         add(Particle("Quark Up", QUARK, 2200.0, "2/3", "1/2"))
         add(Particle("Quark Charm", QUARK, 1280.0, "2/3", "1/2"))
         add(Particle("Quark Top", QUARK, 173100.0, "2/3", "1/2"))
@@ -32,6 +35,11 @@ class ParticlesActivity : AppCompatActivity() {
         add(Particle("W boson", GAUGE_BOSON, 80930.0, "±1", "1"))
 
         add(Particle("Higgs", SCALAR_BOSON, 124970.0, "0", "0"))
+    }*/
+    private val adapter = ParticlesRecyclerViewAdapter(this)
+
+    companion object {
+        const val COLLECTION_PARTICLES = "particles"
     }
 
 
@@ -41,6 +49,29 @@ class ParticlesActivity : AppCompatActivity() {
         binding = ActivityParticlesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.particlesRecyclerView.adapter = ParticlesRecyclerViewAdapter(particles, this)
+        firestore = FirebaseFirestore.getInstance()
+        val collection = firestore.collection(COLLECTION_PARTICLES)
+        collection.get().addOnSuccessListener {
+
+            particles = it.documents.mapNotNull { dbParticle ->
+                dbParticle.toObject(Particle::class.java)
+            } as ArrayList
+
+            adapter.updateParticlesList(particles)
+
+        }.addOnFailureListener {
+            Toast.makeText(this, "The request has failed", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.particlesRecyclerView.adapter = adapter
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        val collection = firestore.collection(COLLECTION_PARTICLES)
+        for (particle in particles) {
+            collection.document(particle.name).set(particle)
+        }
     }
 }
