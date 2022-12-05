@@ -54,4 +54,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    // Ads
+    implementation 'com.google.android.gms:play-services-ads:21.3.0'
 }

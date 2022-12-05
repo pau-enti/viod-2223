@@ -1,10 +1,15 @@
 package com.example.firstapp.particleslist
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.firstapp.databinding.ActivityParticlesBinding
 import com.example.firstapp.particleslist.Particle.Family.*
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ParticlesActivity : AppCompatActivity() {
@@ -64,6 +69,44 @@ class ParticlesActivity : AppCompatActivity() {
         }
 
         binding.particlesRecyclerView.adapter = adapter
+
+        MobileAds.initialize(this)
+
+        val somethif = this
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val request = AdRequest.Builder().build()
+        binding.adView.loadAd(request)
+        binding.adView.adListener = object : AdListener() {
+            override fun onAdClicked() {
+                super.onAdClicked()
+            }
+
+            override fun onAdClosed() {
+                super.onAdClosed()
+            }
+
+            override fun onAdFailedToLoad(p0: LoadAdError) {
+                super.onAdFailedToLoad(p0)
+            }
+
+            override fun onAdImpression() {
+                super.onAdImpression()
+            }
+
+            override fun onAdLoaded() {
+                super.onAdLoaded()
+            }
+
+            override fun onAdOpened() {
+                super.onAdOpened()
+            }
+        }
+
+        adapter.loadAd()
     }
 
     override fun onPause() {

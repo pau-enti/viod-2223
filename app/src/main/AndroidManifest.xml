@@ -16,6 +16,11 @@
         android:theme="@style/Theme.FirstApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
         <activity
             android:name=".fragments.BottomBarActivity"
             android:exported="true" >
