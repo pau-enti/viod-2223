@@ -33,19 +33,23 @@
         <activity
             android:name=".particleslist.ParticlesActivity"
             android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".messenger.login.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true">
 
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
+        <activity android:name=".messenger.contacts.ContactsActivity"/>
+        <activity android:name=".messenger.chat.ChatActivity"/>
     </application>
 
 </manifest>
