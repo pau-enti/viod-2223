@@ -58,33 +58,22 @@ class ContactsRecyclerViewAdapter(private val activity: Activity) :
             val intent = Intent(activity, ChatActivity::class.java)
             intent.putExtra(ChatActivity.EXTRA_USER_ID, contact.userId)
 
-            ad?.fullScreenContentCallback = object : FullScreenContentCallback() {
-                override fun onAdDismissedFullScreenContent() {
-                    activity.startActivity(intent)
-                }
-
-                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                    activity.startActivity(intent)
-                }
-
-                override fun onAdShowedFullScreenContent() {
-                    ad = null
-                }
-            }
-
             ad?.apply {
+                fullScreenContentCallback = object : FullScreenContentCallback() {
+                    override fun onAdDismissedFullScreenContent() {
+                        activity.startActivity(intent)
+                    }
+
+                    override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                        activity.startActivity(intent)
+                    }
+
+                    override fun onAdShowedFullScreenContent() {
+                        ad = null
+                    }
+                }
                 show(activity)
             } ?: activity.startActivity(intent)
-
-//            ad?.let {
-//                it.show(activity)
-//            } ?: activity.startActivity(intent)
-
-//            if (ad != null) {
-//                ad?.show(activity)
-//            } else {
-//                activity.startActivity(intent)
-//            }
         }
     }
 
@@ -96,6 +85,4 @@ class ContactsRecyclerViewAdapter(private val activity: Activity) :
         val name: TextView = binding.contactName
         val image: ImageView = binding.contactImage
     }
-
-
 }
