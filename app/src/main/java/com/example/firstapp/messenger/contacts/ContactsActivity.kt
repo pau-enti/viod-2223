@@ -12,6 +12,7 @@ import com.example.firstapp.messenger.contacts.model.Contact
 import com.example.firstapp.messenger.login.LoginActivity
 import com.google.android.gms.ads.*
 import com.google.firebase.auth.FirebaseAuth
+import androidx.activity.viewModels
 
 
 class ContactsActivity : AppCompatActivity() {
@@ -19,7 +20,7 @@ class ContactsActivity : AppCompatActivity() {
     lateinit var binding: ActivityContactsBinding
     private lateinit var adapter: ContactsRecyclerViewAdapter
 
-    private val contacts = ArrayList<Contact>()
+    private val contactsViewModel: ContactsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +34,15 @@ class ContactsActivity : AppCompatActivity() {
         binding.addContactButton.setOnClickListener {
             val newContact = binding.newContact.text.toString()
             binding.newContact.text?.clear()
-            contacts.add(Contact(newContact, newContact))
-            adapter.updateContacts(contacts)
+            contactsViewModel.addContact(Contact(newContact, newContact))
         }
 
         MobileAds.initialize(this)
+
+        contactsViewModel.contacts.observe(this) {
+            adapter.updateContacts(it)
+        }
+        contactsViewModel.readData(this)
     }
 
     override fun onResume() {
@@ -49,6 +54,11 @@ class ContactsActivity : AppCompatActivity() {
         adapter.loadAd()
 //        binding.adView.adListener = object : AdListener() {
 //        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        contactsViewModel.saveData(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
