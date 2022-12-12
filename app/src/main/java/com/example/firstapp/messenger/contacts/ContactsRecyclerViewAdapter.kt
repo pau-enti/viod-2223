@@ -2,12 +2,14 @@ package com.example.firstapp.messenger.contacts
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.firstapp.R
 import com.example.firstapp.databinding.ItemContactBinding
 import com.example.firstapp.messenger.chat.ChatActivity
 import com.example.firstapp.messenger.contacts.model.Contact
@@ -18,7 +20,10 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 
-class ContactsRecyclerViewAdapter(private val activity: Activity) :
+class ContactsRecyclerViewAdapter(
+    private val activity: Activity,
+    private val contactsViewModel: ContactsViewModel,
+) :
     RecyclerView.Adapter<ContactsRecyclerViewAdapter.ContactViewHolder>() {
 
     private var contacts: List<Contact> = listOf()
@@ -27,7 +32,7 @@ class ContactsRecyclerViewAdapter(private val activity: Activity) :
     fun loadAd() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(activity, "ca-app-pub-3940256099942544/1033173712",
-        adRequest, object : InterstitialAdLoadCallback() {
+            adRequest, object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(p0: LoadAdError) {
                     ad = null
                 }
@@ -74,6 +79,21 @@ class ContactsRecyclerViewAdapter(private val activity: Activity) :
                 }
                 show(activity)
             } ?: activity.startActivity(intent)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            val dialog = AlertDialog.Builder(activity)
+            dialog.setTitle(activity.getString(R.string.delete))
+            dialog.setMessage(activity.getString(R.string.contacts_adapter_delete_confirmation, contact.name))
+
+            dialog.setPositiveButton("Yes") { _, _ ->
+                contactsViewModel.removeContact(contact)
+            }
+            dialog.setNegativeButton("No") { _, _ ->
+                // pass
+            }
+            dialog.show()
+            true
         }
     }
 

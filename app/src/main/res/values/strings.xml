@@ -3,4 +3,6 @@
     <string name="example">Text canviat</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="contacts_adapter_delete_confirmation">Are you sure you want to delete %1$s of your contacts?</string>
+    <string name="delete">Delete</string>
 </resources>

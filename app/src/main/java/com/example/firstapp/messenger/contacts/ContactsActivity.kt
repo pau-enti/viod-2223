@@ -28,7 +28,7 @@ class ContactsActivity : AppCompatActivity() {
         binding = ActivityContactsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ContactsRecyclerViewAdapter(this)
+        adapter = ContactsRecyclerViewAdapter(this, contactsViewModel)
         binding.contactsRecyclerView.adapter = adapter
 
         binding.addContactButton.setOnClickListener {

@@ -44,5 +44,10 @@ class ContactsViewModel : ViewModel() {
         contacts.postValue(contacts.value)
     }
 
+    fun removeContact(contact: Contact) {
+        contacts.value?.remove(contact)
+        contacts.postValue(contacts.value)
+    }
+
 
 }
