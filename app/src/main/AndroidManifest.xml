@@ -16,40 +16,40 @@
         android:theme="@style/Theme.FirstApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".dragging.DragAndDropActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="ca-app-pub-3940256099942544~3347511713" />
 
         <activity
             android:name=".fragments.BottomBarActivity"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".quotes.QuotesActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".particleslist.ParticlesActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".messenger.login.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
-        <activity android:name=".messenger.contacts.ContactsActivity"/>
-        <activity android:name=".messenger.chat.ChatActivity"/>
+        <activity android:name=".messenger.contacts.ContactsActivity" />
+        <activity android:name=".messenger.chat.ChatActivity" />
     </application>
 
 </manifest>
