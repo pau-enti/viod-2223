@@ -66,4 +66,7 @@ dependencies {
 
     // Realtime database
     implementation 'com.google.firebase:firebase-database-ktx'
+
+    // Shared prefs
+    implementation "androidx.preference:preference-ktx:1.2.0"
 }
